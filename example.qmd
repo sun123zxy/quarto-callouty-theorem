@@ -4,7 +4,6 @@ format:
   html:
     filters: # apply the filter to HTML output only
       - callouty-theorem
-  docx: default # other formats not infected
 
 callouty-theorem:
   thm:
@@ -51,7 +50,7 @@ callouty-theorem:
     callout: default # also support default style here
 ---
 
-This example Quarto markdown file demonstrates the use of the `callouty-theorem` filter. For more information, see [the repository here](https://github.com/sun123zxy/quarto-callouty-theorem).
+This example Quarto markdown file demonstrates the use of the `callouty-theorem` filter.
 
 ### Examples
 

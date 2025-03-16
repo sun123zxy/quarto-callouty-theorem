@@ -3,3 +3,5 @@
 *.docx
 *_files/
 /.luarc.json
+/_output/
+/.quarto/

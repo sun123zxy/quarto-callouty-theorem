@@ -1,0 +1,7 @@
+project:
+  type: website
+
+website:
+  site-url: "https://sun123zxy.github.io/quarto-callouty-theorem/"
+  sidebar:
+    contents: auto
