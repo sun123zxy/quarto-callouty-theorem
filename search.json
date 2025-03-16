@@ -1,0 +1,33 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "README",
+    "section": "",
+    "text": "This Quarto extension wraps your theorems and proofs in callout blocks for better visual appeal.\n\nRepository\nLive Demo\n\n\n\nquarto add sun123zxy/quarto-callouty-theorem\nThis will install the extension under the _extensions subdirectory. If you’re using version control, you may want to check in this directory.\n\n\n\nSee example.qmd. Refer to the comments in the source code for further instructions."
+  },
+  {
+    "objectID": "index.html#installation",
+    "href": "index.html#installation",
+    "title": "README",
+    "section": "",
+    "text": "quarto add sun123zxy/quarto-callouty-theorem\nThis will install the extension under the _extensions subdirectory. If you’re using version control, you may want to check in this directory."
+  },
+  {
+    "objectID": "index.html#usage-examples",
+    "href": "index.html#usage-examples",
+    "title": "README",
+    "section": "",
+    "text": "See example.qmd. Refer to the comments in the source code for further instructions."
+  },
+  {
+    "objectID": "example.html",
+    "href": "example.html",
+    "title": "callouty-theorem Example",
+    "section": "",
+    "text": "This example Quarto markdown file demonstrates the use of the callouty-theorem filter. For more information, see the repository here.\n\nExamples\n\n\n\n\n\n\n\nProposition 1 If there exists a primitive root modulo \\(n\\), then there are exactly \\(\\varphi(\\varphi(n))\\) primitive roots modulo \\(n\\).\n\n\n\n\n\n\n\n\n\n\n\nTheorem 1 (Existence of primitive roots) Primitive roots modulo \\(n\\) exists if and only if \\(n = 2, 4, p^k, 2p^k\\) for an odd prime \\(p\\) and a positive integer \\(k\\).\n\n\n\n\n\n\n\n\n\n\nProof (Proof of Proposition 1)\n\n\n\n\n\n\nProof (Proof of Proposition 1). We note that the primitive roots modulo \\(n\\) is exactly the generators of the group of units modulo \\(n\\). By the hypothesis, the group of units modulo \\(n\\) is cyclic, thus having \\(\\varphi(\\varphi(n))\\) generators.\n\n\n\n\n\n\n\n\n\n\nRemark\n\n\n\n\n\n\nRemark. Group theory greatly simplifies the proof of the theorem.\n\n\n\n\n\n\n\n\n\n\n\nExercise 1 Prove that the quadratic residues modulo \\(p\\) form a subgroup of the group of units modulo \\(p\\) of index \\(2\\).\n\n\n\n\n\n\n\n\n\n\nSolution (Solution to Exercise 1)\n\n\n\n\n\n\nSolution 1 (Solution to Exercise 1). Use the fact that the group of units modulo \\(p\\) is cyclic.\n\n\n\n\n\n\nOn default behaviors\n\n\n\n\n\n\nNote\n\n\n\n\nCorollary 1 (Default style) If you set the metadata of a theorem type to default, it will be rendered like this.\n\n\n\n\n\n\n\n\n\nDefinition (Default style without title)\n\n\n\n\nDefinition 1 (Default style without title) callout can also be set to default in the metadata.\n\n\n\n\nConjecture 1 (As is) Theorem types not specified in the metadata will be rendered as is.",
+    "crumbs": [
+      "callouty-theorem Example"
+    ]
+  }
+]
