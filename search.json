@@ -14,20 +14,27 @@
     "href": "index.html",
     "title": "README",
     "section": "",
-    "text": "This Quarto extension wraps your theorems and proofs in callout blocks for better visual appeal.\n\nRepository\nLive Demo\n\n\n\nquarto add sun123zxy/quarto-callouty-theorem\nThis will install the extension under the _extensions subdirectory. If you’re using version control, you may want to check in this directory.\n\n\n\nSee example.qmd. Refer to the comments in the source code for further instructions."
+    "text": "This Quarto extension wraps your theorems and proofs in callout blocks for better visual appeal.\n\nRepository\nLive Demo\n\n\n\nquarto add sun123zxy/quarto-callouty-theorem\nThis will install the extension under the _extensions subdirectory. If you’re using version control, you may want to check in this directory.\nModify the YAML front matter of your document or _quarto.yml to include the extension. In most scenarios, you may only wish to enable this extension for HTML output like so:\nformat:\n  html:\n    filters:\n      - callouty-theorem\nThough you can also enable it globally for all formats:\nfilters:\n  - callouty-theorem\n\n\n\nHere is a typical configuration:\ncallouty-theorem:\n  proof: # Type of the theorem or proof. Note that for theorems 3-letter abbreviation (`thm`, etc.) should be used\n    override-title: true # Whether to override the title of the callout block by the name of the theorem or proof\n    callout: # Configuration for the callout block. Refer to Quarto's Callout documentation for more information\n      type: note\n      appearance: default\n      collapse: true\n      icon: true\nAbove will wrap all proofs into collapsable callout blocks with its icon and an overrided title. See the source code of example.qmd for more example usage.\n\n\n\nThis extension is licensed under the MIT License."
   },
   {
     "objectID": "index.html#installation",
     "href": "index.html#installation",
     "title": "README",
     "section": "",
-    "text": "quarto add sun123zxy/quarto-callouty-theorem\nThis will install the extension under the _extensions subdirectory. If you’re using version control, you may want to check in this directory."
+    "text": "quarto add sun123zxy/quarto-callouty-theorem\nThis will install the extension under the _extensions subdirectory. If you’re using version control, you may want to check in this directory.\nModify the YAML front matter of your document or _quarto.yml to include the extension. In most scenarios, you may only wish to enable this extension for HTML output like so:\nformat:\n  html:\n    filters:\n      - callouty-theorem\nThough you can also enable it globally for all formats:\nfilters:\n  - callouty-theorem"
   },
   {
     "objectID": "index.html#usage-examples",
     "href": "index.html#usage-examples",
     "title": "README",
     "section": "",
-    "text": "See example.qmd. Refer to the comments in the source code for further instructions."
+    "text": "Here is a typical configuration:\ncallouty-theorem:\n  proof: # Type of the theorem or proof. Note that for theorems 3-letter abbreviation (`thm`, etc.) should be used\n    override-title: true # Whether to override the title of the callout block by the name of the theorem or proof\n    callout: # Configuration for the callout block. Refer to Quarto's Callout documentation for more information\n      type: note\n      appearance: default\n      collapse: true\n      icon: true\nAbove will wrap all proofs into collapsable callout blocks with its icon and an overrided title. See the source code of example.qmd for more example usage."
+  },
+  {
+    "objectID": "index.html#license",
+    "href": "index.html#license",
+    "title": "README",
+    "section": "",
+    "text": "This extension is licensed under the MIT License."
   }
 ]
