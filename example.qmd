@@ -1,0 +1,115 @@
+---
+title: "callouty-theorem Example"
+format:
+  html:
+    filters: # apply the filter to HTML output only
+      - callouty-theorem
+  docx: default # other formats not infected
+
+callouty-theorem:
+  thm:
+    override-title: false # do not override the title of the callout (title won't show when `appearance` set to `simple` or `minimal`)
+    callout: # parameters of the wrapping callout. see Quarto documentation of callouts for more details
+      type: note
+      appearance: minimal
+  prp:
+    override-title: false
+    callout:
+      type: note
+      appearance: minimal
+  exr:
+    override-title: false
+    callout:
+      type: tip
+      appearance: minimal
+  proof: # also support wrapping proof-like environments
+    override-title: true # override the title of the callout by the name of the theorem
+    callout:
+      type: note
+      appearance: default
+      collapse: true
+      icon: true
+  solution:
+    override-title: true
+    callout:
+      type: note
+      appearance: default
+      collapse: true
+      icon: true
+  remark:
+    override-title: true
+    callout:
+      type: tip
+      appearance: default
+      collapse: false
+      icon: true
+
+  # theorems types not specified in the metadata will be rendered as is
+  cor: default # calloutify corollaries with default style
+  def:
+    override-title: true
+    callout: default # also support default style here
+---
+
+This example Quarto markdown file demonstrates the use of the `callouty-theorem` filter. For more information, see [the repository here](https://github.com/sun123zxy/quarto-callouty-theorem).
+
+### Examples
+
+:::{#prp-pr-number}
+
+If there exists a primitive root modulo $n$, then there are exactly $\varphi(\varphi(n))$ primitive roots modulo $n$.
+:::
+
+:::{#thm-pr-existence}
+
+## Existence of primitive roots
+
+Primitive roots modulo $n$ exists if and only if $n = 2, 4, p^k, 2p^k$ for an odd prime $p$ and a positive integer $k$.
+:::
+
+:::{.proof}
+
+## Proof of [@prp-pr-number]
+
+We note that the primitive roots modulo $n$ is exactly the generators of the group of units modulo $n$. By the hypothesis, the group of units modulo $n$ is cyclic, thus having $\varphi(\varphi(n))$ generators.
+:::
+
+:::{.remark}
+
+Group theory greatly simplifies the proof of the theorem.
+:::
+
+:::{#exr-quadratic-residue}
+
+Prove that the quadratic residues modulo $p$ form a subgroup of the group of units modulo $p$ of index $2$.
+:::
+
+:::{#sol-quadratic-residue}
+
+## Solution to [@exr-quadratic-residue]
+
+Use the fact that the group of units modulo $p$ is cyclic.
+:::
+
+### On default behaviors
+
+:::{#cor-default}
+
+## Default style
+
+If you set the metadata of a theorem type to `default`, it will be rendered like this.
+:::
+
+:::{#def-default}
+
+## Default style without title
+
+`callout` can also be set to `default` in the metadata.
+:::
+
+:::{#cnj-nil}
+
+## As is
+
+Theorem types not specified in the metadata will be rendered as is.
+:::

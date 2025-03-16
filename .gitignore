@@ -1,0 +1,5 @@
+*.html
+*.pdf
+*.docx
+*_files/
+/.luarc.json
