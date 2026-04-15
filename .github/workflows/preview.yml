@@ -1,0 +1,43 @@
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - closed
+
+name: PR Preview
+
+# Permissions needed to push the preview to gh-pages and comment on the PR
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency: preview-${{ github.ref }}
+
+jobs:
+  deploy-preview:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Quarto
+        if: github.event.action != 'closed'
+        uses: quarto-dev/quarto-actions/setup@v2
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Render Quarto Project
+        if: github.event.action != 'closed'
+        uses: quarto-dev/quarto-actions/render@v2
+        env:
+          QUARTO_PROFILE: website
+
+      - name: Deploy PR preview
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: _site
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
