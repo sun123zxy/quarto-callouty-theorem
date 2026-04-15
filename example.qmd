@@ -73,6 +73,13 @@ Primitive roots modulo $n$ exists if and only if $n = 2, 4, p^k, 2p^k$ for an od
 We note that the primitive roots modulo $n$ is exactly the generators of the group of units modulo $n$. By the hypothesis, the group of units modulo $n$ is cyclic, thus having $\varphi(\varphi(n))$ generators.
 :::
 
+:::{.proof collapse="false"}
+
+## Proof of [@thm-pr-existence] (always expanded)
+
+This proof overrides the global `collapse: true` setting using `collapse="false"` on the div, so it is always shown expanded.
+:::
+
 :::{.remark}
 
 Group theory greatly simplifies the proof of the theorem.

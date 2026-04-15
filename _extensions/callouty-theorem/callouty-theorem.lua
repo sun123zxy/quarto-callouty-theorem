@@ -127,7 +127,24 @@ local function calloutify(el, is_proof)
   if type(callouty_meta[typ]) == "table" then
     override_title = callouty_meta[typ]["override-title"] or override_title
     if type(callouty_meta[typ]["callout"]) == "table" then
-      callout_tbl = callouty_meta[typ]["callout"]
+      -- make a shallow copy to avoid mutating the global metadata across elements
+      local src = callouty_meta[typ]["callout"]
+      callout_tbl = {}
+      for k, v in pairs(src) do callout_tbl[k] = v end
+    end
+  end
+
+  -- Allow per-div override of the collapse setting via a `collapse` attribute
+  if el.attr and el.attr.attributes then
+    local div_collapse = el.attr.attributes["collapse"]
+    if div_collapse ~= nil then
+      if div_collapse == "true" then
+        callout_tbl.collapse = true
+      elseif div_collapse == "false" then
+        callout_tbl.collapse = false
+      else
+        quarto.log.warning("callouty-theorem: unrecognized collapse value '" .. div_collapse .. "'; expected 'true' or 'false'")
+      end
     end
   end
 
