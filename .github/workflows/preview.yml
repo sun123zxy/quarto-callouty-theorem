@@ -57,7 +57,7 @@ jobs:
             :rocket: View preview at ${{ steps.preview-step.outputs.preview-url }}
 
             Built to branch [`gh-pages`](${{ github.server_url }}/${{ github.repository }}/tree/gh-pages) at ${{ steps.preview-step.outputs.action-start-time }}.
-            Preview will be ready when the [GitHub Pages deployment](${{ github.server_url }}/${{ github.repository }}/deployments) is complete.
+            If the preview is not immediately available, wait for the [GitHub Pages deployment](${{ github.server_url }}/${{ github.repository }}/deployments) to complete.
 
       - uses: marocchino/sticky-pull-request-comment@v2
         if: steps.preview-step.outputs.deployment-action == 'remove'
@@ -68,4 +68,4 @@ jobs:
             [PR Preview Action](https://github.com/rossjrw/pr-preview-action) ${{ steps.preview-step.outputs.action-version }}
             :---:
             Preview removed because the pull request was closed.
-            ${{ steps.preview-step.outputs.action-start-time }}
+            Removed at: ${{ steps.preview-step.outputs.action-start-time }}
