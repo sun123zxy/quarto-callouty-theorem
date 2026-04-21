@@ -41,7 +41,7 @@ jobs:
         with:
           source-dir: _output
           action: ${{ github.event.action == 'closed' && 'remove' || 'deploy' }}
-          comment: "false"
+          comment: false
           wait-for-pages-deployment: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
