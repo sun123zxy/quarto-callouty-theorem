@@ -134,9 +134,11 @@ local function calloutify(el, is_proof)
     end
   end
 
-  -- Allow per-div override of the collapse setting via a `collapse` attribute
-  if el.attr and el.attr.attributes then
-    local div_collapse = el.attr.attributes["collapse"]
+  -- Allow per-div override of the collapse setting via a `collapse` attribute.
+  -- Quarto stores the original pandoc Div in el.div; attributes are on el.div.attr.
+  local source_attr = (el.div and el.div.attr) or el.attr
+  if source_attr and source_attr.attributes then
+    local div_collapse = source_attr.attributes["collapse"]
     if div_collapse ~= nil then
       if div_collapse == "true" then
         callout_tbl.collapse = true
