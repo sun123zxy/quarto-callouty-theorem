@@ -80,6 +80,13 @@ We note that the primitive roots modulo $n$ is exactly the generators of the gro
 This proof overrides the global `collapse: true` setting using `collapse="false"` on the div, so it is always shown expanded.
 :::
 
+:::{.proof type="tip" appearance="simple" icon="false" collapse="false"}
+
+## Per-Div Override
+
+This proof overrides the callout `type`, `appearance`, `icon`, and `collapse` directly on the div.
+:::
+
 :::{.remark}
 
 Group theory greatly simplifies the proof of the theorem.

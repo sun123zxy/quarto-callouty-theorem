@@ -44,23 +44,11 @@ callouty-theorem:
       icon: true
 ```
 
-Above will wrap all proofs into collapsable callout blocks with its icon and an overrided title. See the source code of [example.qmd](example.qmd) for more example usage.
+Above will wrap all proofs into collapsable callout blocks with its icon and an overrided title. 
 
-## Per-div Collapse Override
+- You can override callout settings for individual theorem/proof divs by adding attributes directly on the div. Per-div attributes take precedence over the global `callouty-theorem` metadata config.
 
-You can override the global `collapse` setting for individual divs by adding a `collapse` attribute directly to the div:
-
-```markdown
-:::{.proof collapse="false"}
-This proof will always be shown expanded, regardless of the global `collapse` setting.
-:::
-
-:::{.proof collapse="true"}
-This proof will be collapsed by default, even if the global setting is `false`.
-:::
-```
-
-The `collapse` attribute on the div takes precedence over the global `callout.collapse` value in the front matter.
+See the source code of [example.qmd](example.qmd) for details.
 
 ## License
 
