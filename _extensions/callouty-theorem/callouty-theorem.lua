@@ -3,6 +3,9 @@
 
 -- copied from quarto-cli/src/resources/filters/common/refs.lua
 local refType = function (id)
+  if not id then
+    return nil
+  end
   local match = string.match(id, "^(%a+)%-")
   if match then
     return pandoc.text.lower(match)
@@ -52,6 +55,11 @@ local theorem_types = {
     env = "exercise",
     style = "definition",
     title = "Exercise"
+  },
+  alg = {
+    env = "algorithm",
+    style = "plain",
+    title = "Algorithm"
   }
 }
 
@@ -106,16 +114,67 @@ local function spawn_callout_title(type_title, name)
   return my_name
 end
 
+local function shallow_copy(tbl)
+  local copy = {}
+  for k, v in pairs(tbl) do
+    copy[k] = v
+  end
+  return copy
+end
+
+local function parse_boolean_attr(value, field)
+  if value == nil then
+    return nil
+  end
+  if type(value) == "boolean" then
+    return value
+  end
+  if type(value) == "string" then
+    local lowered = pandoc.text.lower(value)
+    if lowered == "true" then
+      return true
+    elseif lowered == "false" then
+      return false
+    end
+  end
+  quarto.log.warning("callouty-theorem: unrecognized " .. field .. " value '" .. pandoc.utils.stringify(value) .. "'; expected 'true' or 'false'")
+  return nil
+end
+
+local function apply_div_callout_overrides(callout_tbl, source_attr)
+  if not source_attr or not source_attr.attributes then
+    return
+  end
+
+  local attrs = source_attr.attributes
+  for _, key in ipairs({"type", "appearance"}) do
+    if attrs[key] ~= nil then
+      callout_tbl[key] = attrs[key]
+    end
+  end
+
+  for _, key in ipairs({"collapse", "icon"}) do
+    local parsed = parse_boolean_attr(attrs[key], key)
+    if parsed ~= nil then
+      callout_tbl[key] = parsed
+    end
+  end
+end
+
 local function calloutify(el, is_proof)
-  local typ, my_types, my_Theorem
+  local typ, my_types, theorem_ctor
   if is_proof then
     typ = el.type:lower()
     my_types = proof_types
-    my_Theorem = quarto.Proof
+    theorem_ctor = quarto.Proof
   else
     typ = refType(el.identifier)
     my_types = theorem_types
-    my_Theorem = quarto.Theorem
+    theorem_ctor = quarto.Theorem
+  end
+
+  if not typ then
+    return el
   end
 
   if not callouty_meta or not callouty_meta[typ] then -- metadata not given, return as is
@@ -127,35 +186,19 @@ local function calloutify(el, is_proof)
   if type(callouty_meta[typ]) == "table" then
     override_title = callouty_meta[typ]["override-title"] or override_title
     if type(callouty_meta[typ]["callout"]) == "table" then
-      -- make a shallow copy to avoid mutating the global metadata across elements
-      local src = callouty_meta[typ]["callout"]
-      callout_tbl = {}
-      for k, v in pairs(src) do callout_tbl[k] = v end
+      callout_tbl = shallow_copy(callouty_meta[typ]["callout"])
     end
   end
 
-  -- Allow per-div override of the collapse setting via a `collapse` attribute.
-  -- Quarto stores the original pandoc Div in el.div; attributes are on el.div.attr.
   local source_attr = (el.div and el.div.attr) or el.attr
-  if source_attr and source_attr.attributes then
-    local div_collapse = source_attr.attributes["collapse"]
-    if div_collapse ~= nil then
-      if div_collapse == "true" then
-        callout_tbl.collapse = true
-      elseif div_collapse == "false" then
-        callout_tbl.collapse = false
-      else
-        quarto.log.warning("callouty-theorem: unrecognized collapse value '" .. div_collapse .. "'; expected 'true' or 'false'")
-      end
-    end
-  end
-
-  if override_title then
+  if override_title and my_types[typ] then
     callout_tbl.title = spawn_callout_title(my_types[typ].title, el.name)
   end
-  callout_tbl.content = my_Theorem(el)
-  local callout = quarto.Callout(callout_tbl)
-  return callout
+
+  apply_div_callout_overrides(callout_tbl, source_attr)
+
+  callout_tbl.content = theorem_ctor(el)
+  return quarto.Callout(callout_tbl)
 end
 
 -- Run in two passes so we process metadata

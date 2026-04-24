@@ -5,3 +5,5 @@
 /.luarc.json
 /_output/
 /.quarto/
+
+**/*.quarto_ipynb
