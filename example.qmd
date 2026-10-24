@@ -126,3 +126,12 @@ If you set the metadata of a theorem type to `default`, it will be rendered like
 
 Theorem types not specified in the metadata will be rendered as is.
 :::
+
+### Corner cases
+
+The filter will transfer the irrelevant attributes to the wrapping callout. See @thm-margin for example.
+
+:::{#thm-margin .column-margin}
+
+This is a theorem placed in a margin column.
+:::
